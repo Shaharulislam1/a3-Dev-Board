@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-    
+
     btnClearHistory.addEventListener('click', function () {
         activitySection.querySelectorAll('p').forEach((p) => p.remove());
     });
