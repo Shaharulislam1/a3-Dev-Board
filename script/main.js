@@ -1,41 +1,47 @@
-// Select elements
+
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Available themes
-const themes = ["bg-green-200", "bg-blue-200", "bg-yellow-200", "bg-red-200", "bg-purple-200"];
-let currentThemeIndex = parseInt(localStorage.getItem('themeIndex')) || 0;
+const themes = ["bg-green-200", "bg-blue-200", "bg-yellow-200", "bg-red-200", "bg-purple-200", "bg-pink-300"];
+let currentTheme = parseInt(localStorage.getItem('themeIndex')) || 0;
 
-// Apply the saved theme on page load
-applyTheme(currentThemeIndex);
+applyTheme(currentTheme);
 
-// Toggle theme on button click
 themeToggle.addEventListener("click", () => {
-    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-    applyTheme(currentThemeIndex);
-    localStorage.setItem('themeIndex', currentThemeIndex);
+    currentTheme = (currentTheme + 1) % themes.length;
+    applyTheme(currentTheme);
+    localStorage.setItem('themeIndex', currentTheme);
 });
 
-// Function to apply theme
 function applyTheme(index) {
-    body.classList.remove(...themes); // Remove all previous themes
-    body.classList.add(themes[index]); // Apply the new theme
+    body.classList.remove(...themes); 
+    body.classList.add(themes[index]); 
 }
 
 document.getElementById('discover-something').addEventListener('click', function() {
-    window.location.href = 'second.html';  // Change to your desired page
+    window.location.href = 'second.html';  
 });
 
 
+ 
+ const now = new Date();
+ const formattedDate = now.toLocaleString('en-US', {
+     weekday: 'long', year: "numeric", month: "long", day: "numeric", 
+     hour: "2-digit", minute: '2-digit', second: '2-digit'
+ });
 
+ function updateTime() {
+    const now = new Date(); 
+    const formattedDate = now.toLocaleString(); 
 
+    document.getElementById('btn-time').textContent = formattedDate; 
+}
+
+setInterval(updateTime, 1000);
+updateTime();
 
 
  
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const btnCompleteList = document.querySelectorAll('.btn-complete'); 
     const btnTask = document.getElementById('btn-task'); 
@@ -51,27 +57,17 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', function () {
             alert('Board update successfully');
 
-            // Update values
             taskCount--;
             navBarCount++;
             btnTask.textContent = taskCount;
             btnNavBar.textContent = navBarCount;
 
-            // Get current date and time
-            const now = new Date();
-            const formattedDate = now.toLocaleString('en-US', {
-                weekday: 'long', year: "numeric", month: "long", day: "numeric", 
-                hour: "2-digit", minute: '2-digit', second: '2-digit'
-            });
-
-            // Show task completion message
             const taskName = btn.parentElement.parentElement.querySelector('p').textContent;
             const message = document.createElement('p');
-            message.textContent = `✅ : "${taskName}" on ${formattedDate}`;
+            message.textContent = `✅ : "${taskName}" `;
             message.classList.add('p-2','rounded-md', 'mt-1');
             activitySection.appendChild(message);
 
-            // Disable the button
             btn.disabled = true;
             btn.classList.add('opacity-50', 'cursor-not-allowed');
 
@@ -83,8 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Clear history button
+    
     btnClearHistory.addEventListener('click', function () {
         activitySection.querySelectorAll('p').forEach((p) => p.remove());
     });
