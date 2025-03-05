@@ -23,12 +23,13 @@ function applyTheme(index) {
 }
 
 document.getElementById('discover-something').addEventListener('click', function() {
-    window.location.href = 'second.html'; // Change to your desired page
+    window.location.href = 'second.html';  // Change to your desired page
 });
 
-// document.getElementById('btn-back').addEventListener('click', function() {
-//     window.history.back();
-// });
+
+
+
+
 
  
 
